@@ -2,17 +2,17 @@
  RapidAid (Final Year Project)
 
  # Setting Up The Project
- ---- Prerequisites ---'\n'
- You'll need to install:'\n'
- -> Flutter SDK (comes with Dart)'\n'
- -> Bloc'\n'
- -> Android Studio (or Xcode for macOS) + emulator'\n'
- -> Java SDK'\n'
+ ------ Prerequisites ------ <br />
+ You'll need to install: <br />
+ -> Flutter SDK (comes with Dart) <br />
+ -> Bloc <br />
+ -> Android Studio (or Xcode for macOS) + emulator <br />
+ -> Java SDK <br />
  
- --- What next? ---'\n'
--> Open your terminal'\n'
--> Navigate to the project directory'\n'
--> Run 'flutter pub get' to install all dependencies needed to run the project'\n'
--> Navigate to main.dart (located in the lib folder)'\n'
--> Run the app (with an emulator)'\n'
+ ------ What next? ------ <br />
+-> Open your terminal <br />
+-> Navigate to the project directory <br />
+-> Run 'flutter pub get' to install all dependencies needed to run the project <br />
+-> Navigate to main.dart (located in the lib folder) <br />
+-> Run the app (with an emulator)
 
