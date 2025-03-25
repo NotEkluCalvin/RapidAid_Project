@@ -359,7 +359,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               primary: Color(0xFFE41F1F),
               onPrimary: Colors.white,
             ),
-            dialogBackgroundColor: Colors.white,
+            dialogTheme: DialogThemeData(backgroundColor: Colors.white),
           ),
           child: child!,
         );

@@ -21,7 +21,7 @@ void main() async {
 class RapidAidApp extends StatelessWidget {
   final List<CameraDescription> cameras;
 
-  const RapidAidApp({Key? key, required this.cameras}) : super(key: key);
+  const RapidAidApp({super.key, required this.cameras});
 
   @override
   Widget build(BuildContext context) {

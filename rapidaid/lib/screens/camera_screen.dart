@@ -7,7 +7,7 @@ import 'package:rapidaid/screens/picture_screen.dart';
 class CameraScreen extends StatefulWidget {
   final List<CameraDescription> cameras;
 
-  const CameraScreen({Key? key, required this.cameras}) : super(key: key);
+  const CameraScreen({super.key, required this.cameras});
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
