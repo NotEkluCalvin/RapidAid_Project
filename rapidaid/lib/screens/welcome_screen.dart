@@ -26,8 +26,8 @@ class WelcomeScreen extends StatelessWidget {
                 child: Image.asset(
                   // 'assets/images/app_logo.png',
                   'assets/images/Emergency call-pana 1.png',
-                  height: 80,
-                  color: const Color(0xFFE41F1F), // Logo color in red
+                  height: 200,
+                  //color: const Color(0xFFE41F1F), // Logo color in red
                 ),
               ),
               SizedBox(height: size.height * 0.1),
