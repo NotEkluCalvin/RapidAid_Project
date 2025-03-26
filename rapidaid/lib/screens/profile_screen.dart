@@ -27,9 +27,10 @@ class ProfileScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 15,
                         backgroundColor: Colors.grey[300],
-                        backgroundImage: const NetworkImage(
-                          'https://via.placeholder.com/30',
-                        ),
+                        // backgroundImage: const NetworkImage(
+                        //   'https://via.placeholder.com/30',
+                        // ),
+                        child: Image.asset('assets/images/user_profile.png'),
                       ),
                       // Location
                       Row(
