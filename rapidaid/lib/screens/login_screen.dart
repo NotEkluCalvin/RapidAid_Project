@@ -324,8 +324,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/custom_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -338,7 +336,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _usernameOrEmailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final bool _obscurePassword = true;
+  bool _obscurePassword = true;
   bool _rememberMe = false;
 
   @override
@@ -349,7 +347,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _showForgotPasswordDialog() {
-    // This functionality could be implemented later
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Password reset functionality')),
     );
@@ -357,22 +354,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
-      // Check for the specific credentials: pnyamekye/2025
       final username = _usernameOrEmailController.text;
       final password = _passwordController.text;
 
       if (username == 'pnyamekye' && password == '2025') {
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Login successful!'),
             backgroundColor: Colors.green,
           ),
         );
-        // Use Go Router instead of Navigator
         context.go('/home');
       } else {
-        // Show error message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Invalid username or password'),
@@ -385,267 +378,214 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen size for responsive design
     final size = MediaQuery.of(context).size;
-    final isSmallScreen = size.width < 360;
 
     return Scaffold(
       body: Stack(
         children: [
-          // Custom background
+          // Custom background with red and white sections
           CustomPaint(
-            painter: OvalBackgroundPainter(),
+            painter: LoginBackgroundPainter(),
             size: Size(size.width, size.height),
           ),
 
-          // App Icons scattered around the red area
-          SafeArea(
-            child: Stack(
-              children: [
-                // Top row icons
-                Positioned(
-                  top: 16,
-                  left: 16,
-                  child: Icon(Icons.local_taxi, color: Colors.white, size: 24),
-                ),
-                Positioned(
-                  top: 16,
-                  right: 16,
-                  child: Icon(
-                    Icons.medical_services,
-                    color: Colors.white,
-                    size: 24,
+          // Scattered icons
+          _buildScatteredIcons(size),
+
+          // Login Container
+          Center(
+            child: Container(
+              width: size.width * 0.85,
+              margin: EdgeInsets.only(top: size.height * 0.1),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
                   ),
-                ),
-                Positioned(
-                  top: 16,
-                  right: size.width * 0.5 - 12,
-                  child: Icon(Icons.call, color: Colors.white, size: 24),
-                ),
-
-                // Middle row icons
-                Positioned(
-                  top: size.height * 0.15,
-                  left: 16,
-                  child: Icon(
-                    Icons.medical_services,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-                Positioned(
-                  top: size.height * 0.15,
-                  right: 16,
-                  child: Icon(Icons.people, color: Colors.white, size: 24),
-                ),
-
-                // Bottom row icons
-                Positioned(
-                  bottom: 16,
-                  left: 16,
-                  child: Icon(Icons.person, color: Colors.white, size: 24),
-                ),
-                Positioned(
-                  bottom: 16,
-                  right: 16,
-                  child: Icon(Icons.shield, color: Colors.white, size: 24),
-                ),
-
-                // Main content - white container
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.05,
-                      vertical: size.height * 0.05,
-                    ),
-                    padding: EdgeInsets.all(size.width * 0.05),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Login title
-                          Center(
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: size.height * 0.03),
-
-                          // Username field
-                          Row(
-                            children: [
-                              Icon(Icons.person_outline, color: Colors.red),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: TextFormField(
-                                  controller: _usernameOrEmailController,
-                                  decoration: InputDecoration(
-                                    hintText: 'Username, phone or email',
-                                    border: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your username, phone or email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: size.height * 0.02),
-
-                          // Password field
-                          Row(
-                            children: [
-                              Icon(Icons.lock_outline, color: Colors.red),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: TextFormField(
-                                  controller: _passwordController,
-                                  obscureText: _obscurePassword,
-                                  decoration: InputDecoration(
-                                    hintText: 'Password',
-                                    border: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
-                                    ),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter your password';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: 16),
-
-                          // Remember me and Forgot Password row
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    height: 24,
-                                    width: 24,
-                                    child: Checkbox(
-                                      value: _rememberMe,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _rememberMe = value ?? false;
-                                        });
-                                      },
-                                      activeColor: const Color(0xFFE41F1F),
-                                    ),
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    'Remember me',
-                                    style: TextStyle(
-                                      fontSize: isSmallScreen ? 12 : 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              GestureDetector(
-                                onTap: _showForgotPasswordDialog,
-                                child: Text(
-                                  'Forgot Password?',
-                                  style: TextStyle(
-                                    fontSize: isSmallScreen ? 12 : 14,
-                                    color: const Color(0xFFE41F1F),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: size.height * 0.04),
-
-                          // Login button
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: _handleLogin,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFE41F1F),
-                                foregroundColor: Colors.white,
-                                padding: EdgeInsets.symmetric(vertical: 12),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
-                              child: Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(height: size.height * 0.04),
-
-                          // Sign up text
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Do not have an account? ',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  // Navigate to sign up page using Go Router
-                                  context.go('/create-account');
-                                },
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: const Color(0xFFE41F1F),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
+              child: _buildLoginForm(size),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScatteredIcons(Size size) {
+    return SafeArea(
+      child: Stack(
+        children: [
+          // Top row icons
+          Positioned(top: 16, left: 16, child: _buildIcon(Icons.local_taxi)),
+          Positioned(
+            top: 16,
+            right: 16,
+            child: _buildIcon(Icons.medical_services),
+          ),
+          Positioned(
+            top: 16,
+            right: size.width * 0.5 - 12,
+            child: _buildIcon(Icons.call),
+          ),
+
+          // Middle row icons
+          Positioned(
+            top: size.height * 0.15,
+            left: 16,
+            child: _buildIcon(Icons.medical_services),
+          ),
+          Positioned(
+            top: size.height * 0.15,
+            right: 16,
+            child: _buildIcon(Icons.people),
+          ),
+
+          // Bottom row icons
+          Positioned(bottom: 16, left: 16, child: _buildIcon(Icons.person)),
+          Positioned(bottom: 16, right: 16, child: _buildIcon(Icons.shield)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIcon(IconData icon) {
+    return Icon(icon, color: Colors.white, size: 24);
+  }
+
+  Widget _buildLoginForm(Size size) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Login',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // Username field
+          TextFormField(
+            controller: _usernameOrEmailController,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.person_outline, color: Colors.red),
+              hintText: 'Username, phone or email',
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your username, phone or email';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 16),
+
+          // Password field
+          TextFormField(
+            controller: _passwordController,
+            obscureText: _obscurePassword,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.lock_outline, color: Colors.red),
+              hintText: 'Password',
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red),
+              ),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your password';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 16),
+
+          // Remember me and Forgot Password
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Checkbox(
+                    value: _rememberMe,
+                    onChanged: (value) {
+                      setState(() {
+                        _rememberMe = value ?? false;
+                      });
+                    },
+                    activeColor: const Color(0xFFE41F1F),
+                  ),
+                  const Text('Remember me'),
+                ],
+              ),
+              GestureDetector(
+                onTap: _showForgotPasswordDialog,
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                    color: const Color(0xFFE41F1F),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+
+          // Login button
+          ElevatedButton(
+            onPressed: _handleLogin,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFE41F1F),
+              foregroundColor: Colors.white,
+              minimumSize: const Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+            child: const Text(
+              'Login',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // Sign up text
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Do not have an account? '),
+              GestureDetector(
+                onTap: () => context.go('/create-account'),
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    color: const Color(0xFFE41F1F),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -653,45 +593,33 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class OvalBackgroundPainter extends CustomPainter {
+class LoginBackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // Create a red background
-    Paint redPaint = Paint()..color = const Color(0xFFE41F1F);
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), redPaint);
-
-    // Create white oval/blob shapes that create the spill effect
-    Paint whitePaint = Paint()..color = Colors.white;
-
-    // Main large oval shape at the bottom center
-    final centerX = size.width / 2;
-    final bottomY = size.height;
-    final mainOvalRect = Rect.fromCenter(
-      center: Offset(centerX, bottomY),
-      width: size.width * 1.4,
-      height: size.height * 1.4,
+    // Red background
+    final redPaint = Paint()..color = const Color(0xFFE41F1F);
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, size.width, size.height * 0.5),
+      redPaint,
     );
-    canvas.drawOval(mainOvalRect, whitePaint);
 
-    // Secondary oval shape on the right side for additional effect
-    final rightOvalRect = Rect.fromCenter(
-      center: Offset(size.width + 20, size.height * 0.6),
-      width: size.width * 0.5,
-      height: size.height * 0.8,
+    // White background with curved edge
+    final whitePaint = Paint()..color = Colors.white;
+    final path = Path();
+    path.moveTo(0, size.height * 0.5);
+    path.quadraticBezierTo(
+      size.width / 2,
+      size.height * 0.6,
+      size.width,
+      size.height * 0.5,
     );
-    canvas.drawOval(rightOvalRect, whitePaint);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.close();
 
-    // Left side oval for better symmetry
-    final leftOvalRect = Rect.fromCenter(
-      center: Offset(-20, size.height * 0.6),
-      width: size.width * 0.5,
-      height: size.height * 0.8,
-    );
-    canvas.drawOval(leftOvalRect, whitePaint);
+    canvas.drawPath(path, whitePaint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
