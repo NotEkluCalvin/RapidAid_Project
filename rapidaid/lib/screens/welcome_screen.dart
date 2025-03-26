@@ -24,7 +24,8 @@ class WelcomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: size.height * 0.05),
                 child: Image.asset(
-                  'assets/images/app_logo.png',
+                  // 'assets/images/app_logo.png',
+                  'assets/images/Emergency call-pana 1.png',
                   height: 80,
                   color: const Color(0xFFE41F1F), // Logo color in red
                 ),
