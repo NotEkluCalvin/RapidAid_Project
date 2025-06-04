@@ -1,6 +1,6 @@
 {
-    "name": "rapidaid",
-    "short_name": "rapidaid",
+    "name": "rapidaidv2",
+    "short_name": "rapidaidv2",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

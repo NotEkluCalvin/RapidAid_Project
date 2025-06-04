@@ -1,13 +1,9 @@
-plugins {
-    kotlin("android") version "1.8.22" apply false
-}
+extra.set("flutter.compileSdkVersion", 33)
+extra.set("flutter.minSdkVersion", 21)
+extra.set("flutter.targetSdkVersion", 33)
+extra.set("flutter.versionCode", 1)
+extra.set("flutter.versionName", "1.0")
 
-buildscript {
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.5.1") // Ensure it's 8.5.1, NOT 8.7.0
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
-    }
-}
 
 allprojects {
     repositories {
@@ -30,5 +26,3 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
-
-

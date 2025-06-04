@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,9 +28,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB-wVKOmANxeMtec-OGB-n3ukYhuRBNTy8',
-    appId: '1:738173339281:web:a65cd4e6ed9583a6646130',
-    messagingSenderId: '738173339281',
-    projectId: 'rapidaid-project',
-    authDomain: 'rapidaid-project.firebaseapp.com',
-    storageBucket: 'rapidaid-project.firebasestorage.app',
-    measurementId: 'G-ZKJCP8Q3CJ',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCQ5-Uq375zg04aEbRhHi-TY7x9xgJenEM',
-    appId: '1:738173339281:android:8f10f582e5338ba0646130',
+    appId: '1:738173339281:android:5037d21274eee039646130',
     messagingSenderId: '738173339281',
     projectId: 'rapidaid-project',
     storageBucket: 'rapidaid-project.firebasestorage.app',
@@ -60,29 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDjfSwN5fUe1dDh50KmuCcqDQmkvXsh7CE',
-    appId: '1:738173339281:ios:4b9b31e6834977a2646130',
+    appId: '1:738173339281:ios:af16fe966beb996a646130',
     messagingSenderId: '738173339281',
     projectId: 'rapidaid-project',
     storageBucket: 'rapidaid-project.firebasestorage.app',
-    iosBundleId: 'com.example.rapidaid',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDjfSwN5fUe1dDh50KmuCcqDQmkvXsh7CE',
-    appId: '1:738173339281:ios:4b9b31e6834977a2646130',
-    messagingSenderId: '738173339281',
-    projectId: 'rapidaid-project',
-    storageBucket: 'rapidaid-project.firebasestorage.app',
-    iosBundleId: 'com.example.rapidaid',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB-wVKOmANxeMtec-OGB-n3ukYhuRBNTy8',
-    appId: '1:738173339281:web:24c41c1321d392d7646130',
-    messagingSenderId: '738173339281',
-    projectId: 'rapidaid-project',
-    authDomain: 'rapidaid-project.firebaseapp.com',
-    storageBucket: 'rapidaid-project.firebasestorage.app',
-    measurementId: 'G-FLJ8XJ2XDF',
+    iosBundleId: 'com.example.rapidaidv2',
   );
 }

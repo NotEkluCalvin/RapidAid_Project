@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:738173339281:android:8f10f582e5338ba0646130",
+        "mobilesdk_app_id": "1:738173339281:android:5037d21274eee039646130",
         "android_client_info": {
-          "package_name": "com.example.rapidaid"
+          "package_name": "com.example.rapidaidv2"
         }
       },
       "oauth_client": [],

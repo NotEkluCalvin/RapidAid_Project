@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "rapidaid" "\0"
+            VALUE "FileDescription", "rapidaidv2" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "rapidaid" "\0"
+            VALUE "InternalName", "rapidaidv2" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "rapidaid.exe" "\0"
-            VALUE "ProductName", "rapidaid" "\0"
+            VALUE "OriginalFilename", "rapidaidv2.exe" "\0"
+            VALUE "ProductName", "rapidaidv2" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
