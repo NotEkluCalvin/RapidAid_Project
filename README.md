@@ -1,5 +1,5 @@
 # RapidAid_Project
- RapidAid (Final Year Project)
+ A crowdsourced emergency reporting mobile app 
 
  # Setting Up The Project
  ------ Prerequisites ------ <br />
