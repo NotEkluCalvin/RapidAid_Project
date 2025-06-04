@@ -1,5 +1,5 @@
 # RapidAid_Project
- A crowdsourced emergency reporting mobile app 
+A mobile app for reporting & keeping up with incidents happening in and around your locality
 
  # Setting Up The Project
  ------ Prerequisites ------ <br />
